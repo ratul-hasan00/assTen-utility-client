@@ -9,6 +9,8 @@ import Home from './Components/Home/Home.jsx';
 import Bills from './Components/Bills.jsx';
 import Login from './Components/Login.jsx';
 import Register from './Components/Register.jsx';
+import Forgot from './Components/Forgot.jsx';
+
 
 const router = createBrowserRouter([
   {
@@ -30,6 +32,10 @@ const router = createBrowserRouter([
       {
         path:'/register',
         element: <Register></Register>
+      },
+      {
+        path: '/forgot',
+        element: <Forgot></Forgot>
       }
     ]
   }
