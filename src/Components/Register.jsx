@@ -1,11 +1,131 @@
-import React from 'react';
+import React, { useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
+import { Link } from "react-router";
 
 const Register = () => {
-    return (
-        <div>
-            i am Register
+  const [showPassword, setShowPassword] = useState(false);
+  const [passwordError, setPasswordError] = useState("");
+
+  const validatePassword = (password) => {
+    if (password.length < 6) {
+      return "Password must be at least 6 characters long";
+    }
+    if (!/[A-Z]/.test(password)) {
+      return "Password must contain at least one uppercase letter";
+    }
+    if (!/[a-z]/.test(password)) {
+      return "Password must contain at least one lowercase letter";
+    }
+    return "";
+  };
+
+  const handlePasswordCheck = (e) => {
+    const value = e.target.value;
+    const error = validatePassword(value);
+    setPasswordError(error);
+  };
+
+  return (
+    <div className="min-h-screen flex items-center justify-center px-4 py-10 bg-base-200 dark:bg-base-300">
+      <div className="w-full max-w-md bg-base-100 dark:bg-base-200 shadow-xl rounded-2xl p-8">
+
+        {/* Title */}
+        <h2 className="text-3xl font-bold text-center mb-6 bg-gradient-to-r from-pink-500 via-red-400 to-orange-400 text-transparent bg-clip-text">
+          Create Your Account
+        </h2>
+
+        {/* Name */}
+        <label className="font-semibold text-base-content">Full Name</label>
+        <input
+          type="text"
+          placeholder="Enter your full name"
+          className="input input-bordered w-full mt-1 mb-4 rounded-xl"
+        />
+
+        {/* Email */}
+        <label className="font-semibold text-base-content">Email</label>
+        <input
+          type="email"
+          placeholder="Enter your email"
+          className="input input-bordered w-full mt-1 mb-4 rounded-xl"
+        />
+
+        {/* Photo URL */}
+        <label className="font-semibold text-base-content">Photo URL</label>
+        <input
+          type="text"
+          placeholder="Paste your photo link"
+          className="input input-bordered w-full mt-1 mb-4 rounded-xl"
+        />
+
+        {/* Password */}
+        <label className="font-semibold text-base-content">Password</label>
+        <div className="relative mt-1">
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="Create a strong password"
+            className="input input-bordered w-full pr-12 rounded-xl"
+            onChange={handlePasswordCheck}
+          />
+          <button
+            type="button"
+            className="absolute right-3 top-3 text-base-content cursor-pointer"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+          </button>
         </div>
-    );
+
+        {/* Password Error */}
+        {passwordError && (
+          <p className="text-red-500 text-sm mt-1">{passwordError}</p>
+        )}
+
+        {/* Register Button */}
+        <button
+          disabled={passwordError}
+          className={`w-full mt-5 py-3 text-white font-semibold rounded-xl
+            bg-gradient-to-r from-pink-500 via-red-400 to-orange-400
+            transition-all duration-300 cursor-pointer
+            ${passwordError ? "opacity-50 cursor-not-allowed" : "hover:opacity-90"}
+          `}
+        >
+          Register
+        </button>
+
+        {/* Divider */}
+        <div className="my-5 flex items-center justify-center">
+          <div className="h-px bg-base-300 w-1/3"></div>
+          <span className="px-3 text-sm text-base-content">OR</span>
+          <div className="h-px bg-base-300 w-1/3"></div>
+        </div>
+
+        {/* Google Register Button */}
+        <button
+          className="
+            w-full py-3 border border-base-300 rounded-xl 
+            font-semibold flex items-center justify-center gap-3
+            hover:bg-base-200 transition-all duration-300 cursor-pointer
+          "
+        >
+          <img
+            src="https://www.svgrepo.com/show/475656/google-color.svg"
+            alt="Google"
+            className="w-6 h-6"
+          />
+          Register with Google
+        </button>
+
+        {/* Login Link */}
+        <p className="text-center mt-6 text-sm text-base-content">
+          Already have an account?
+          <Link to="/login" className="text-pink-500 font-semibold ml-1 hover:underline">
+            Login
+          </Link>
+        </p>
+      </div>
+    </div>
+  );
 };
 
 export default Register;
