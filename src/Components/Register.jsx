@@ -1,11 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Eye, EyeOff } from "lucide-react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import { AuthContext } from "../Context/AuthContext";
+import toast from "react-hot-toast";
 
 const Register = () => {
+  const { createUser, signInWithGoogle } = useContext(AuthContext);
+  const navigate = useNavigate();
+
   const [showPassword, setShowPassword] = useState(false);
   const [passwordError, setPasswordError] = useState("");
 
+  const [name, setName] = useState("");
+  const [photoURL, setPhotoURL] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  // PASSWORD VALIDATION
   const validatePassword = (password) => {
     if (password.length < 6) {
       return "Password must be at least 6 characters long";
@@ -21,25 +33,60 @@ const Register = () => {
 
   const handlePasswordCheck = (e) => {
     const value = e.target.value;
-    const error = validatePassword(value);
-    setPasswordError(error);
+    setPassword(value);
+    setPasswordError(validatePassword(value));
+  };
+
+  // REGISTER HANDLER
+  const handleRegister = async () => {
+    if (!name || !email || !password) {
+      toast.error("All fields are required!");
+      return;
+    }
+    if (passwordError) return;
+
+    try {
+      setLoading(true);
+      await createUser(email, password, name, photoURL);
+      toast.success("Account created successfully!");
+      navigate("/");
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // GOOGLE REGISTER
+  const handleGoogleRegister = async () => {
+    try {
+      setLoading(true);
+      await signInWithGoogle();
+      toast.success("Registered using Google!");
+      navigate("/");
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-10 bg-base-200 dark:bg-base-300">
       <div className="w-full max-w-md bg-base-100 dark:bg-base-200 shadow-xl rounded-2xl p-8">
-    <title>Register Now!</title>
-        {/* Title */}
+
         <h2 className="text-3xl font-bold text-center mb-6 bg-gradient-to-r from-pink-500 via-red-400 to-orange-400 text-transparent bg-clip-text">
           Create Your Account
         </h2>
 
-        {/* Name */}
+        {/* Full Name */}
         <label className="font-semibold text-base-content">Full Name</label>
         <input
           type="text"
           placeholder="Enter your full name"
           className="input input-bordered w-full mt-1 mb-4 rounded-xl"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
 
         {/* Email */}
@@ -48,6 +95,8 @@ const Register = () => {
           type="email"
           placeholder="Enter your email"
           className="input input-bordered w-full mt-1 mb-4 rounded-xl"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
 
         {/* Photo URL */}
@@ -56,6 +105,8 @@ const Register = () => {
           type="text"
           placeholder="Paste your photo link"
           className="input input-bordered w-full mt-1 mb-4 rounded-xl"
+          value={photoURL}
+          onChange={(e) => setPhotoURL(e.target.value)}
         />
 
         {/* Password */}
@@ -65,6 +116,7 @@ const Register = () => {
             type={showPassword ? "text" : "password"}
             placeholder="Create a strong password"
             className="input input-bordered w-full pr-12 rounded-xl"
+            value={password}
             onChange={handlePasswordCheck}
           />
           <button
@@ -76,21 +128,21 @@ const Register = () => {
           </button>
         </div>
 
-        {/* Password Error */}
         {passwordError && (
           <p className="text-red-500 text-sm mt-1">{passwordError}</p>
         )}
 
         {/* Register Button */}
         <button
-          disabled={passwordError}
+          disabled={passwordError || loading}
+          onClick={handleRegister}
           className={`w-full mt-5 py-3 text-white font-semibold rounded-xl
             bg-gradient-to-r from-pink-500 via-red-400 to-orange-400
             transition-all duration-300 cursor-pointer
-            ${passwordError ? "opacity-50 cursor-not-allowed" : "hover:opacity-90"}
+            ${passwordError || loading ? "opacity-50 cursor-not-allowed" : "hover:opacity-90"}
           `}
         >
-          Register
+          {loading ? "Creating Account..." : "Register"}
         </button>
 
         {/* Divider */}
@@ -100,8 +152,9 @@ const Register = () => {
           <div className="h-px bg-base-300 w-1/3"></div>
         </div>
 
-        {/* Google Register Button */}
+        {/* Google Register */}
         <button
+          onClick={handleGoogleRegister}
           className="
             w-full py-3 border border-base-300 rounded-xl 
             font-semibold flex items-center justify-center gap-3
@@ -116,7 +169,6 @@ const Register = () => {
           Register with Google
         </button>
 
-        {/* Login Link */}
         <p className="text-center mt-6 text-sm text-base-content">
           Already have an account?
           <Link to="/login" className="text-pink-500 font-semibold ml-1 hover:underline">
