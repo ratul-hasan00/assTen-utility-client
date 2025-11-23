@@ -37,17 +37,50 @@ const Register = () => {
     setPasswordError(validatePassword(value));
   };
 
-  // REGISTER HANDLER
+  // ========== SAVE USER TO DATABASE ==============
+  const saveUserToDB = async (userInfo) => {
+    try {
+      const res = await fetch("http://localhost:3000/users", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(userInfo),
+      });
+
+      return await res.json();
+    } catch (error) {
+      console.log("Error saving user:", error);
+    }
+  };
+
+  // ========== MANUAL REGISTER ==============
   const handleRegister = async () => {
     if (!name || !email || !password) {
       toast.error("All fields are required!");
       return;
     }
+
     if (passwordError) return;
 
     try {
       setLoading(true);
-      await createUser(email, password, name, photoURL);
+
+      // 1. Create Firebase user
+      const result = await createUser(email, password, name, photoURL);
+      const loggedUser = result.user;
+
+      // 2. Save to MongoDB
+      const userInfo = {
+        name,
+        email: loggedUser.email,
+        photoURL,
+        authType: "email-password",
+        createdAt: new Date(),
+      };
+
+      await saveUserToDB(userInfo);
+
       toast.success("Account created successfully!");
       navigate("/");
     } catch (error) {
@@ -57,11 +90,26 @@ const Register = () => {
     }
   };
 
-  // GOOGLE REGISTER
+  // ========== GOOGLE REGISTER ==============
   const handleGoogleRegister = async () => {
     try {
       setLoading(true);
-      await signInWithGoogle();
+
+      // 1. Sign in with Google
+      const result = await signInWithGoogle();
+      const loggedUser = result.user;
+
+      // 2. Save to MongoDB
+      const userInfo = {
+        name: loggedUser.displayName,
+        email: loggedUser.email,
+        photoURL: loggedUser.photoURL,
+        authType: "google",
+        createdAt: new Date(),
+      };
+
+      await saveUserToDB(userInfo);
+
       toast.success("Registered using Google!");
       navigate("/");
     } catch (error) {
@@ -74,7 +122,6 @@ const Register = () => {
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-10 bg-base-200 dark:bg-base-300">
       <div className="w-full max-w-md bg-base-100 dark:bg-base-200 shadow-xl rounded-2xl p-8">
-
         <h2 className="text-3xl font-bold text-center mb-6 bg-gradient-to-r from-pink-500 via-red-400 to-orange-400 text-transparent bg-clip-text">
           Create Your Account
         </h2>
@@ -138,7 +185,7 @@ const Register = () => {
           onClick={handleRegister}
           className={`w-full mt-5 py-3 text-white font-semibold rounded-xl
             bg-gradient-to-r from-pink-500 via-red-400 to-orange-400
-            transition-all duration-300 cursor-pointer
+            transition-all duration-300
             ${passwordError || loading ? "opacity-50 cursor-not-allowed" : "hover:opacity-90"}
           `}
         >
@@ -155,11 +202,9 @@ const Register = () => {
         {/* Google Register */}
         <button
           onClick={handleGoogleRegister}
-          className="
-            w-full py-3 border border-base-300 rounded-xl 
+          className="w-full py-3 border border-base-300 rounded-xl 
             font-semibold flex items-center justify-center gap-3
-            hover:bg-base-200 transition-all duration-300 cursor-pointer
-          "
+            hover:bg-base-200 transition-all duration-300"
         >
           <img
             src="https://www.svgrepo.com/show/475656/google-color.svg"

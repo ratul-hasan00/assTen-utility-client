@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { AuthContext } from './AuthContext';
-import { auth } from '../Firebase/firebase.init';
+import React, { useEffect, useState } from "react";
+import { AuthContext } from "./AuthContext";
+import { auth } from "../Firebase/firebase.init";
+
 import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
@@ -9,17 +10,27 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
-  updateProfile
-} from 'firebase/auth';
+  updateProfile,
+} from "firebase/auth";
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const createUser = (email, password, name, photoURL) => {
+  // ✅ FIXED MANUAL REGISTER (NOW RETURNS result.user CORRECTLY)
+  const createUser = async (email, password, name, photoURL) => {
     setLoading(true);
-    return createUserWithEmailAndPassword(auth, email, password)
-      .then((result) => updateProfile(result.user, { displayName: name, photoURL }));
+
+    // 1. Create Firebase account
+    const result = await createUserWithEmailAndPassword(auth, email, password);
+
+    // 2. Update name + photo
+    await updateProfile(result.user, {
+      displayName: name,
+      photoURL: photoURL,
+    });
+
+    return result; // VERY IMPORTANT
   };
 
   const googleProvider = new GoogleAuthProvider();
@@ -41,13 +52,14 @@ const AuthProvider = ({ children }) => {
     return sendPasswordResetEmail(auth, email);
   };
 
-  // NEW: Update profile function
-  const updateUserProfile = (profile) => {
+  // Update profile manually
+  const updateUserProfile = async (profile) => {
     setLoading(true);
-    return updateProfile(auth.currentUser, profile)
-      .then(() => setUser({ ...auth.currentUser, ...profile }));
+    await updateProfile(auth.currentUser, profile);
+    setUser({ ...auth.currentUser, ...profile });
   };
 
+  // Track logged-in user state
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -63,12 +75,16 @@ const AuthProvider = ({ children }) => {
     signInWithGoogle,
     signOutUser,
     resetPassword,
-    updateUserProfile, 
+    updateUserProfile,
     setLoading,
-    loading
+    loading,
   };
 
-  return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={authInfo}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export default AuthProvider;
