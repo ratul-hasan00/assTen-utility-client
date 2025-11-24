@@ -3,9 +3,16 @@ import "./LoadingSpinner.css";
 
 const LoadingSpinner = () => {
   return (
-    <div className="loader-wrapper">
-      <div className="loader-circle"></div>
-      <p className="loader-text">Loading...</p>
+    <div className="loading-wrapper">
+      <p className="loading-text">
+        <span className="gradient-text">L</span>
+        <span className="spin-letter">O</span>
+        <span className="gradient-text">A</span>
+        <span className="gradient-text">D</span>
+        <span className="gradient-text">I</span>
+        <span className="gradient-text">G</span>
+        <span className="spin-letter">N</span>
+      </p>
     </div>
   );
 };
