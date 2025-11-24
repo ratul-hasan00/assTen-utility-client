@@ -13,6 +13,8 @@ import AuthProvider from './Context/AuthProvider.jsx';
 import { Toaster } from "react-hot-toast";
 import Profile from './Components/Navbar/Profile.jsx';
 import EditProfile from './Components/EditProfile.jsx';
+import PrivateRoute from './Components/PrivateRoute.jsx';
+import MyPayBills from './Components/MyPayBills.jsx';
 
 
 
@@ -43,11 +45,21 @@ const router = createBrowserRouter([
       },
       {
         path: '/profile',
-        element: <Profile></Profile>
+        element: <PrivateRoute>
+          <Profile></Profile>
+        </PrivateRoute>
       },
       {
         path: '/editProfile',
-        element: <EditProfile></EditProfile>
+        element: <PrivateRoute>
+          <EditProfile></EditProfile>
+        </PrivateRoute>
+      },
+      {
+        path: '/mypaybills',
+        element: <PrivateRoute>
+          <MyPayBills></MyPayBills>
+        </PrivateRoute>
       }
       
     ]
