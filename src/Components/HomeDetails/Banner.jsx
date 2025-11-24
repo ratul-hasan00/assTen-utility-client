@@ -9,7 +9,7 @@ const Banner = () => {
     const gradientClass = "bg-gradient-to-r from-pink-500 via-red-400 to-orange-400 text-transparent bg-clip-text";
 
     return (
-        <div className="w-full py-12 px-6 md:px-12 lg:px-20">
+        <div className="w-full py-10 px-6 md:px-12 lg:px-20">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
 
                 {/* LEFT: Title */}

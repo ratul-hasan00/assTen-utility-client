@@ -33,7 +33,7 @@ path: "/bills?category=Internet",
 ];
 
 const Category = () => {
-return ( <section className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-20"> <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-4 bg-gradient-to-r from-pink-500 via-red-400 to-orange-400 text-transparent bg-clip-text">
+return ( <section className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 pt-15"> <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-4 bg-gradient-to-r from-pink-500 via-red-400 to-orange-400 text-transparent bg-clip-text">
 Explore Categories </h2> <p className="text-center text-gray-400 dark:text-gray-200 mb-12 max-w-2xl mx-auto">
 Choose from our main utility categories to manage your bills efficiently.
 Click any category to view detailed information and stay on top of your payments! </p>
