@@ -4,6 +4,7 @@ import { jsPDF } from "jspdf";
 import { AuthContext } from "../Context/AuthContext";
 import LoadingSpinner from "./LoadingSpinner";
 
+
 const MyPayBills = () => {
     const { user } = useContext(AuthContext);
     const [payments, setPayments] = useState([]);
@@ -126,6 +127,7 @@ const MyPayBills = () => {
     return (
         <div className="container mx-auto p-6">
             {/* Header */}
+            <title>My Pay Bills</title>
             <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
                 <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-4 bg-gradient-to-r from-pink-500 via-red-400 to-orange-400 text-transparent bg-clip-text">My Payment History</h2>
 

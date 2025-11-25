@@ -46,6 +46,7 @@ const EditProfile = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-base-200 dark:bg-base-300 px-4 py-12">
+      <title>Edit Profile</title>
       <div className="w-full max-w-md bg-base-100 dark:bg-base-200 shadow-xl rounded-3xl p-8">
         <h2 className="text-3xl font-bold text-center mb-6 bg-gradient-to-r from-pink-500 via-red-400 to-orange-400 text-transparent bg-clip-text">
           Edit Profile

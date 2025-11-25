@@ -9,6 +9,7 @@ import Recent from '../HomeDetails/Recent';
 const Home = () => {
     return (
         <div>
+            <title>Home</title>
             <Banner></Banner>
             <Category></Category>
             <Recent></Recent>

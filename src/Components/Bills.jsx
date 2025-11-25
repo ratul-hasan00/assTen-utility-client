@@ -69,6 +69,7 @@ const Bills = () => {
 
   return (
     <section className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-10">
+      <title>Bills</title>
       <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-6 bg-gradient-to-r from-pink-500 via-red-400 to-orange-400 text-transparent bg-clip-text">
         All Bills
       </h2>

@@ -16,6 +16,8 @@ import EditProfile from './Components/EditProfile.jsx';
 import PrivateRoute from './Components/PrivateRoute.jsx';
 import MyPayBills from './Components/MyPayBills.jsx';
 import BillDetails from './Components/BillDetails.jsx';
+import AboutPage from './Components/AboutPage.jsx';
+import ErrorPage from './Components/ErrorPage.jsx';
 
 
 
@@ -27,6 +29,10 @@ const router = createBrowserRouter([
       {
         index: true,
         Component: Home
+      },
+      {
+        path: '*',
+        element: <ErrorPage></ErrorPage>
       },
       {
         path: '/bills',
@@ -57,6 +63,12 @@ const router = createBrowserRouter([
         </PrivateRoute>
       },
       {
+        path: '/about',
+        element: <PrivateRoute>
+          <AboutPage></AboutPage>
+        </PrivateRoute>
+      },
+      {
         path: '/mypaybills',
         element: <PrivateRoute>
           <MyPayBills></MyPayBills>
@@ -67,6 +79,12 @@ const router = createBrowserRouter([
         loader: ({ params }) => fetch(`http://localhost:3000/bills/${params.id}`),
         element: <PrivateRoute>
           <BillDetails></BillDetails>
+        </PrivateRoute>
+      },
+      {
+        path: '/mypaybills',
+        element: <PrivateRoute>
+          <MyPayBills></MyPayBills>
         </PrivateRoute>
       }
 

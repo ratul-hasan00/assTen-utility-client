@@ -12,6 +12,7 @@ const Profile = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-start bg-base-200 dark:bg-base-300 px-4 py-12">
+      <title>My Profile</title>
       <div className="max-w-3xl w-full bg-base-100 dark:bg-base-200 shadow-2xl rounded-3xl p-8 flex flex-col md:flex-row gap-8">
 
         {/* Left: Profile Photo and Info */}

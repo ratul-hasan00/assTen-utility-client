@@ -51,6 +51,7 @@ const BillDetails = () => {
 
     return (
         <div className="container mx-auto p-6">
+            <title>Bill Details</title>
             {/* Card */}
             <div className="flex flex-col md:flex-row bg-gradient-to-tr from-pink-500 via-red-400 to-orange-400 p-6 rounded-xl shadow-lg items-center md:items-start text-center md:text-left">
 
