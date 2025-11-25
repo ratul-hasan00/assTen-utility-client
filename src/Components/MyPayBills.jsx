@@ -65,7 +65,7 @@ const MyPayBills = () => {
         };
         try {
             setLoading(true);
-            const res = await fetch(`http://localhost:3000/payment-bills/${editPayment._id}`, {
+            const res = await fetch(`https://utility-billhub-server.vercel.app/payment-bills/${editPayment._id}`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(updated),

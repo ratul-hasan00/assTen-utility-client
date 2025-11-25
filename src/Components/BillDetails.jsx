@@ -28,7 +28,7 @@ const BillDetails = () => {
         };
 
         try {
-            const res = await fetch("http://localhost:3000/payment-bills", {
+            const res = await fetch("https://utility-billhub-server.vercel.app/payment-bills", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payInfo),

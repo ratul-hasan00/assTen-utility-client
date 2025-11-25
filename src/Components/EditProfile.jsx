@@ -24,7 +24,7 @@ const EditProfile = () => {
         photoURL: photoURL,
       };
 
-      await fetch(`http://localhost:3000/users/${user?.email}`, {
+      await fetch(`https://utility-billhub-server.vercel.app/users/${user?.email}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
