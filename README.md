@@ -4,7 +4,7 @@ BillHub is a **Utility Bill Management System** built with the MERN stack. It al
 
 ## Live Site
 * **client-site-live-link:**: https://utility-billhub.web.app
-* **server-site-live-link:**: https://utility-billhub-server.vercel.app
+* **server-site-live-link:**: https://ass-ten-utility-server.vercel.app
 
 
 ## Technologies Used

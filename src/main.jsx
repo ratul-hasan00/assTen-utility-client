@@ -80,7 +80,7 @@ const router = createBrowserRouter([
         element: <PrivateRoute>
           <BillDetails></BillDetails>
         </PrivateRoute>,
-        loader: ({ params }) => fetch(`http://localhost:3000/bills/${params.id}`),
+        loader: ({ params }) => fetch(`https://ass-ten-utility-server.vercel.app/bills/${params.id}`),
         hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>
       },
       {

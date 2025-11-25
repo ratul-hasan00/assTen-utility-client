@@ -39,7 +39,7 @@ const Register = () => {
 
   const saveUserToDB = async (userInfo) => {
     try {
-      const res = await fetch("https://utility-billhub-server.vercel.app/users", {
+      const res = await fetch("https://ass-ten-utility-server.vercel.app/users", {
         method: "POST",
         headers: {
           "content-type": "application/json",

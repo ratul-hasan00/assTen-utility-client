@@ -26,7 +26,7 @@ const Bills = () => {
     const fetchBills = async () => {
       try {
         setLoadingBills(true);
-        let url = "https://utility-billhub-server.vercel.app/bills";
+        let url = "https://ass-ten-utility-server.vercel.app/bills";
         if (category && category !== "All") {
           url += `?category=${encodeURIComponent(category)}`;
         }

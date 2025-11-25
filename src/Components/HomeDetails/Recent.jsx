@@ -10,7 +10,7 @@ const Recent = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("https://utility-billhub-server.vercel.app/bills")
+    fetch("https://ass-ten-utility-server.vercel.app/bills")
       .then((res) => res.json())
       .then((data) => {
         if (!Array.isArray(data)) return;

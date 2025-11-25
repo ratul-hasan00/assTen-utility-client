@@ -15,7 +15,7 @@ const MyPayBills = () => {
     const fetchPayments = async () => {
         try {
             setLoading(true);
-            const res = await fetch(`http://localhost:3000/payment-bills?email=${user?.email}`);
+            const res = await fetch(`https://ass-ten-utility-server.vercel.app/payment-bills?email=${user?.email}`);
             const data = await res.json();
             setPayments(data);
         } catch (err) {
@@ -33,7 +33,7 @@ const MyPayBills = () => {
     const handleDelete = async () => {
         try {
             setLoading(true);
-            const res = await fetch(`http://localhost:3000/payment-bills/${deletePayment._id}`, {
+            const res = await fetch(`https://ass-ten-utility-server.vercel.app/payment-bills/${deletePayment._id}`, {
                 method: "DELETE",
             });
             const data = await res.json();
@@ -65,7 +65,7 @@ const MyPayBills = () => {
         };
         try {
             setLoading(true);
-            const res = await fetch(`https://utility-billhub-server.vercel.app/payment-bills/${editPayment._id}`, {
+            const res = await fetch(`https://ass-ten-utility-server.vercel.app/payment-bills/${editPayment._id}`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(updated),
