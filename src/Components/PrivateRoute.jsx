@@ -3,21 +3,21 @@ import { Navigate, useLocation } from 'react-router';
 import { AuthContext } from '../Context/AuthContext';
 import LoadingSpinner from './LoadingSpinner';
 
-const PrivateRoute = ({children}) => {
+const PrivateRoute = ({ children }) => {
 
-const {user,loading} = use(AuthContext)
+    const { user, loading } = use(AuthContext)
 
-const location = useLocation();
+    const location = useLocation();
 
 
-if(loading){
-    return <LoadingSpinner></LoadingSpinner>
-}
+    if (loading) {
+        return <LoadingSpinner></LoadingSpinner>
+    }
 
-if(user && user?.email){
-    return children
-}
-return <Navigate state={location.pathname} to='/login'></Navigate>
+    if (user && user?.email) {
+        return children
+    }
+    return <Navigate state={location.pathname} to='/login'></Navigate>
 
 };
 

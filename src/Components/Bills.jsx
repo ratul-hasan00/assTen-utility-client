@@ -48,7 +48,6 @@ const Bills = () => {
     fetchBills();
   }, [category]);
 
-  // Close dropdown if clicked outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -70,21 +69,21 @@ const Bills = () => {
   return (
     <section className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-10">
       <title>Bills</title>
-      <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-6 bg-gradient-to-r from-pink-500 via-red-400 to-orange-400 text-transparent bg-clip-text">
+      <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-6 bg-gradient-to-r from-pink-500 via-red-400 to-orange-400 text-transparent bg-clip-text" data-aos="zoom-in"
+        data-aos-duration="1000">
         All Bills
       </h2>
 
-      {/* Custom Dropdown */}
-      <div className="relative mb-6" ref={dropdownRef}>
+      <div className="relative mb-6" ref={dropdownRef} data-aos="zoom-in"
+        data-aos-duration="1500">
         <button
           onClick={() => setDropdownOpen((prev) => !prev)}
           className="p-3 px-4 rounded-full bg-gradient-to-r from-pink-500 via-red-400 to-orange-400 text-white font-semibold shadow-lg hover:scale-105 transform transition duration-300 flex items-center justify-between w-48"
         >
           {category}
           <svg
-            className={`h-4 w-4 ml-2 transform transition-transform ${
-              dropdownOpen ? "rotate-180" : ""
-            }`}
+            className={`h-4 w-4 ml-2 transform transition-transform ${dropdownOpen ? "rotate-180" : ""
+              }`}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
           >
@@ -110,8 +109,8 @@ const Bills = () => {
         )}
       </div>
 
-      {/* Bills Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8" data-aos="zoom-in"
+        data-aos-duration="1800">
         {bills.map((bill) => (
           <div
             key={bill._id}

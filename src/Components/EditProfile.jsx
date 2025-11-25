@@ -17,10 +17,8 @@ const EditProfile = () => {
     setLoading(true);
 
     try {
-      // 1. UPDATE IN FIREBASE
       await updateUserProfile({ displayName, photoURL });
 
-      // 2. UPDATE IN MONGODB
       const updatedUser = {
         name: displayName,
         photoURL: photoURL,
@@ -47,13 +45,15 @@ const EditProfile = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-base-200 dark:bg-base-300 px-4 py-12">
       <title>Edit Profile</title>
-      <div className="w-full max-w-md bg-base-100 dark:bg-base-200 shadow-xl rounded-3xl p-8">
-        <h2 className="text-3xl font-bold text-center mb-6 bg-gradient-to-r from-pink-500 via-red-400 to-orange-400 text-transparent bg-clip-text">
+      <div className="w-full max-w-md bg-base-100 dark:bg-base-200 shadow-xl rounded-3xl p-8" data-aos="zoom-in"
+        data-aos-duration="1000">
+        <h2 className="text-3xl font-bold text-center mb-6 bg-gradient-to-r from-pink-500 via-red-400 to-orange-400 text-transparent bg-clip-text" data-aos="fade-right"
+          data-aos-duration="1200">
           Edit Profile
         </h2>
 
-        {/* Live Preview */}
-        <div className="flex justify-center mb-4">
+        <div className="flex justify-center mb-4" data-aos="fade-left"
+          data-aos-duration="1200">
           <img
             src={
               photoURL ||
@@ -66,8 +66,9 @@ const EditProfile = () => {
         </div>
 
         <form onSubmit={handleUpdate} className="space-y-4">
-          {/* Name */}
-          <div>
+
+          <div data-aos="zoom-out"
+            data-aos-duration="1200">
             <label className="font-semibold text-base-content">Full Name</label>
             <input
               type="text"
@@ -78,8 +79,8 @@ const EditProfile = () => {
             />
           </div>
 
-          {/* Photo URL */}
-          <div>
+          <div data-aos="zoom-out"
+            data-aos-duration="1400">
             <label className="font-semibold text-base-content">Photo URL</label>
             <input
               type="text"
@@ -90,6 +91,7 @@ const EditProfile = () => {
           </div>
 
           <button
+
             type="submit"
             disabled={updating}
             className={`w-full py-3 text-white font-semibold rounded-xl

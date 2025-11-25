@@ -27,7 +27,6 @@ const Login = () => {
     setPasswordError(validatePassword(value));
   };
 
-  // ===== SAVE GOOGLE USER TO DATABASE =====
   const saveUserToDB = async (userInfo) => {
     try {
       const res = await fetch("http://localhost:3000/users", {
@@ -41,7 +40,6 @@ const Login = () => {
     }
   };
 
-  // ===== EMAIL/PASSWORD LOGIN =====
   const handleLogin = async () => {
     if (passwordError) return;
     try {
@@ -56,7 +54,6 @@ const Login = () => {
     }
   };
 
-  // ===== GOOGLE LOGIN =====
   const handleGoogleLogin = async () => {
     try {
       setLoading(true);
@@ -64,7 +61,6 @@ const Login = () => {
       const loggedUser = result.user;
 
 
-      // Save to backend just like Register.jsx  
       const userInfo = {
         name: loggedUser.displayName,
         email: loggedUser.email,
@@ -83,11 +79,10 @@ const Login = () => {
       setLoading(false);
     }
 
-
   };
 
-  return (<div className="min-h-screen flex items-center justify-center px-4 py-10 bg-base-200 dark:bg-base-300"> <div className="w-full max-w-md bg-base-100 dark:bg-base-200 shadow-xl rounded-2xl p-8">
-
+  return (<div className="min-h-screen flex items-center justify-center px-4 py-10 bg-base-200 dark:bg-base-300"> <div className="w-full max-w-md bg-base-100 dark:bg-base-200 shadow-xl rounded-2xl p-8" data-aos="zoom-in"
+    data-aos-duration="1000">
 
     <h2 className="text-3xl font-bold text-center mb-6 bg-gradient-to-r from-pink-500 via-red-400 to-orange-400 text-transparent bg-clip-text">
       Login to BillHub
@@ -140,7 +135,6 @@ const Login = () => {
       <div className="h-px bg-base-300 w-1/3"></div>
     </div>
 
-    {/* Google Login button like Register.jsx */}
     <button
       onClick={handleGoogleLogin}
       className="w-full py-3 border border-base-300 rounded-xl font-semibold flex items-center justify-center gap-3 hover:bg-base-200 transition-all duration-300"

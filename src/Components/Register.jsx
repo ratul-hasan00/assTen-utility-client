@@ -17,7 +17,7 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // PASSWORD VALIDATION
+
   const validatePassword = (password) => {
     if (password.length < 6) {
       return "Password must be at least 6 characters long";
@@ -37,7 +37,6 @@ const Register = () => {
     setPasswordError(validatePassword(value));
   };
 
-  // ========== SAVE USER TO DATABASE ==============
   const saveUserToDB = async (userInfo) => {
     try {
       const res = await fetch("http://localhost:3000/users", {
@@ -54,7 +53,6 @@ const Register = () => {
     }
   };
 
-  // ========== MANUAL REGISTER ==============
   const handleRegister = async () => {
     if (!name || !email || !password) {
       toast.error("All fields are required!");
@@ -66,11 +64,9 @@ const Register = () => {
     try {
       setLoading(true);
 
-      // 1. Create Firebase user
       const result = await createUser(email, password, name, photoURL);
       const loggedUser = result.user;
 
-      // 2. Save to MongoDB
       const userInfo = {
         name,
         email: loggedUser.email,
@@ -90,16 +86,13 @@ const Register = () => {
     }
   };
 
-  // ========== GOOGLE REGISTER ==============
   const handleGoogleRegister = async () => {
     try {
       setLoading(true);
 
-      // 1. Sign in with Google
       const result = await signInWithGoogle();
       const loggedUser = result.user;
 
-      // 2. Save to MongoDB
       const userInfo = {
         name: loggedUser.displayName,
         email: loggedUser.email,
@@ -121,12 +114,12 @@ const Register = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-10 bg-base-200 dark:bg-base-300">
-      <div className="w-full max-w-md bg-base-100 dark:bg-base-200 shadow-xl rounded-2xl p-8">
+      <div className="w-full max-w-md bg-base-100 dark:bg-base-200 shadow-xl rounded-2xl p-8" data-aos="zoom-in"
+        data-aos-duration="1000">
         <h2 className="text-3xl font-bold text-center mb-6 bg-gradient-to-r from-pink-500 via-red-400 to-orange-400 text-transparent bg-clip-text">
           Create Your Account
         </h2>
 
-        {/* Full Name */}
         <label className="font-semibold text-base-content">Full Name</label>
         <input
           type="text"
@@ -136,7 +129,6 @@ const Register = () => {
           onChange={(e) => setName(e.target.value)}
         />
 
-        {/* Email */}
         <label className="font-semibold text-base-content">Email</label>
         <input
           type="email"
@@ -146,7 +138,6 @@ const Register = () => {
           onChange={(e) => setEmail(e.target.value)}
         />
 
-        {/* Photo URL */}
         <label className="font-semibold text-base-content">Photo URL</label>
         <input
           type="text"
@@ -156,7 +147,6 @@ const Register = () => {
           onChange={(e) => setPhotoURL(e.target.value)}
         />
 
-        {/* Password */}
         <label className="font-semibold text-base-content">Password</label>
         <div className="relative mt-1">
           <input
@@ -179,7 +169,6 @@ const Register = () => {
           <p className="text-red-500 text-sm mt-1">{passwordError}</p>
         )}
 
-        {/* Register Button */}
         <button
           disabled={passwordError || loading}
           onClick={handleRegister}
@@ -192,14 +181,12 @@ const Register = () => {
           {loading ? "Creating Account..." : "Register"}
         </button>
 
-        {/* Divider */}
         <div className="my-5 flex items-center justify-center">
           <div className="h-px bg-base-300 w-1/3"></div>
           <span className="px-3 text-sm text-base-content">OR</span>
           <div className="h-px bg-base-300 w-1/3"></div>
         </div>
 
-        {/* Google Register */}
         <button
           onClick={handleGoogleRegister}
           className="w-full py-3 border border-base-300 rounded-xl 

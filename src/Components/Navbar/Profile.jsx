@@ -13,10 +13,11 @@ const Profile = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-start bg-base-200 dark:bg-base-300 px-4 py-12">
       <title>My Profile</title>
-      <div className="max-w-3xl w-full bg-base-100 dark:bg-base-200 shadow-2xl rounded-3xl p-8 flex flex-col md:flex-row gap-8">
+      <div className="max-w-3xl w-full bg-base-100 dark:bg-base-200 shadow-2xl rounded-3xl p-8 flex flex-col md:flex-row gap-8" data-aos="zoom-in"
+        data-aos-duration="1000">
 
-        {/* Left: Profile Photo and Info */}
-        <div className="flex flex-col items-center md:items-start md:w-1/3">
+        <div className="flex flex-col items-center md:items-start md:w-1/3" data-aos="fade-right"
+          data-aos-duration="1500">
           <img
             src={user?.photoURL || "https://i.ibb.co/4pDNDk1/avatar.png"}
             alt="User"
@@ -34,8 +35,8 @@ const Profile = () => {
           </Link>
         </div>
 
-        {/* Right: Details */}
-        <div className="flex-1 flex flex-col gap-4">
+        <div className="flex-1 flex flex-col gap-4" data-aos="fade-left"
+          data-aos-duration="1500">
           <div className="flex items-center gap-3 bg-base-200 dark:bg-base-300 p-4 rounded-xl shadow">
             <Key className="text-pink-500" />
             <div>

@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
 import { useLoaderData } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
-import toast from "react-hot-toast"; // <--- import React Hot Toast
+import toast from "react-hot-toast";
 
 const BillDetails = () => {
-    const bill = useLoaderData();  // GET DATA FROM ROUTER LOADER
+    const bill = useLoaderData();
     const { user } = useContext(AuthContext);
     const [openModal, setOpenModal] = useState(false);
 
@@ -12,7 +12,6 @@ const BillDetails = () => {
     const currentMonth = new Date().getMonth();
     const isPayable = billMonth === currentMonth;
 
-    // Handle payment submission
     const handlePayBill = async (e) => {
         e.preventDefault();
         const form = e.target;
@@ -39,7 +38,7 @@ const BillDetails = () => {
             if (data.insertedId) {
                 toast.success("Bill Paid Successfully!");
                 setOpenModal(false);
-                form.reset(); // Clear form after success
+                form.reset();
             } else {
                 toast.error("Payment failed! Try again.");
             }
@@ -52,10 +51,9 @@ const BillDetails = () => {
     return (
         <div className="container mx-auto p-6">
             <title>Bill Details</title>
-            {/* Card */}
+
             <div className="flex flex-col md:flex-row bg-gradient-to-tr from-pink-500 via-red-400 to-orange-400 p-6 rounded-xl shadow-lg items-center md:items-start text-center md:text-left">
 
-                {/* Left: Image */}
                 <div className="md:w-1/2 flex items-center justify-center p-6 relative">
                     <div className="w-80 h-80 rounded-xl bg-gradient-to-tr from-blue-500 via-cyan-400 to-green-400 flex items-center justify-center overflow-hidden transition-transform duration-500 hover:scale-105">
                         <img
@@ -66,7 +64,6 @@ const BillDetails = () => {
                     </div>
                 </div>
 
-                {/* Right: Bill Details */}
                 <div className="md:w-1/2 flex flex-col justify-between p-6 text-white mt-6 md:mt-0">
                     <h2 className="text-3xl font-bold mb-3 text-white">{bill.title}</h2>
 
@@ -106,7 +103,6 @@ const BillDetails = () => {
                 </div>
             </div>
 
-            {/* Payment Modal */}
             {openModal && (
                 <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
                     <div className="bg-gradient-to-tr from-pink-500 via-red-400 to-orange-400 p-6 rounded-xl w-[90%] max-w-md shadow-lg text-white">

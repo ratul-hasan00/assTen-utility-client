@@ -42,7 +42,6 @@ const EditProfile = () => {
 
         <form onSubmit={handleUpdate} className="space-y-4">
 
-          {/* Display Name */}
           <div>
             <label className="font-semibold text-base-content">Full Name</label>
             <input
@@ -55,7 +54,6 @@ const EditProfile = () => {
             />
           </div>
 
-          {/* Photo URL */}
           <div>
             <label className="font-semibold text-base-content">Photo URL</label>
             <input
@@ -67,7 +65,6 @@ const EditProfile = () => {
             />
           </div>
 
-          {/* Submit Button */}
           <button
             type="submit"
             disabled={updating}

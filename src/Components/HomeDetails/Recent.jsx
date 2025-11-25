@@ -5,7 +5,7 @@ import { NavLink, useNavigate } from "react-router";
 
 const Recent = () => {
   const [bills, setBills] = useState([]);
-  const [loadingBills, setLoadingBills] = useState(true); // track fetch
+  const [loadingBills, setLoadingBills] = useState(true);
   const { user, loading: authLoading } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -24,19 +24,22 @@ const Recent = () => {
   }, []);
 
   if (authLoading || loadingBills) {
-    return <LoadingSpinner />; // horizontally centered only
+    return <LoadingSpinner />;
   }
 
   return (
     <section className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 pt-15">
-      <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-4 bg-gradient-to-r from-pink-500 via-red-400 to-orange-400 text-transparent bg-clip-text">
+      <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-4 bg-gradient-to-r from-pink-500 via-red-400 to-orange-400 text-transparent bg-clip-text" data-aos="zoom-in"
+        data-aos-duration="1000">
         Recent Bills
       </h2>
-      <p className="text-center text-gray-400 dark:text-gray-200 mb-12 max-w-2xl mx-auto">
+      <p className="text-center text-gray-400 dark:text-gray-200 mb-12 max-w-2xl mx-auto" data-aos="zoom-in"
+        data-aos-duration="1500">
         Keep track of your latest bills and quickly access details for easy management.
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8" data-aos="zoom-in"
+        data-aos-duration="2000">
         {bills.map((bill) => (
           <div
             key={bill._id}

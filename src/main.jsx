@@ -10,7 +10,6 @@ import Login from './Components/Login.jsx';
 import Register from './Components/Register.jsx';
 import Forgot from './Components/Forgot.jsx';
 import AuthProvider from './Context/AuthProvider.jsx';
-import { Toaster } from "react-hot-toast";
 import Profile from './Components/Navbar/Profile.jsx';
 import EditProfile from './Components/EditProfile.jsx';
 import PrivateRoute from './Components/PrivateRoute.jsx';
@@ -18,6 +17,8 @@ import MyPayBills from './Components/MyPayBills.jsx';
 import BillDetails from './Components/BillDetails.jsx';
 import AboutPage from './Components/AboutPage.jsx';
 import ErrorPage from './Components/ErrorPage.jsx';
+import LoadingSpinner from './Components/LoadingSpinner.jsx';
+
 
 
 
@@ -76,10 +77,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/billsdetails/:id',
-        loader: ({ params }) => fetch(`http://localhost:3000/bills/${params.id}`),
         element: <PrivateRoute>
           <BillDetails></BillDetails>
-        </PrivateRoute>
+        </PrivateRoute>,
+        loader: ({ params }) => fetch(`http://localhost:3000/bills/${params.id}`),
+        hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>
       },
       {
         path: '/mypaybills',
@@ -96,7 +98,6 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider>
       <RouterProvider router={router}></RouterProvider>
-      <Toaster position="top-center" />
     </AuthProvider>
   </StrictMode>,
 )

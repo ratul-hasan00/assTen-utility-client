@@ -12,7 +12,6 @@ const MyPayBills = () => {
     const [editPayment, setEditPayment] = useState(null);
     const [deletePayment, setDeletePayment] = useState(null);
 
-    // Fetch user's payment bills
     const fetchPayments = async () => {
         try {
             setLoading(true);
@@ -31,7 +30,6 @@ const MyPayBills = () => {
         if (user?.email) fetchPayments();
     }, [user?.email]);
 
-    // Delete payment
     const handleDelete = async () => {
         try {
             setLoading(true);
@@ -54,7 +52,6 @@ const MyPayBills = () => {
         }
     };
 
-    // Update payment
     const handleUpdate = async (e) => {
         e.preventDefault();
         const form = e.target;
@@ -89,7 +86,6 @@ const MyPayBills = () => {
         }
     };
 
-    // Download PDF
     const downloadPDF = () => {
         if (!payments.length) return;
         const doc = new jsPDF();
@@ -126,16 +122,18 @@ const MyPayBills = () => {
 
     return (
         <div className="container mx-auto p-6">
-            {/* Header */}
             <title>My Pay Bills</title>
             <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
-                <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-4 bg-gradient-to-r from-pink-500 via-red-400 to-orange-400 text-transparent bg-clip-text">My Payment History</h2>
+                <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-4 bg-gradient-to-r from-pink-500 via-red-400 to-orange-400 text-transparent bg-clip-text" data-aos="zoom-in"
+                    data-aos-duration="1000">My Payment History</h2>
 
                 <button
                     onClick={downloadPDF}
                     className="bg-gradient-to-r from-pink-500 via-red-400 to-orange-400 
                     hover:scale-105 transition-transform duration-300 
                     text-white px-5 py-2 rounded-lg shadow-lg"
+                    data-aos="zoom-in"
+                    data-aos-duration="1500"
                 >
                     Download PDF
                 </button>
@@ -144,7 +142,8 @@ const MyPayBills = () => {
             {payments.length === 0 ? (
                 <p className="dark:text-gray-300">No payments found.</p>
             ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" data-aos="zoom-in"
+                    data-aos-duration="1800">
                     {payments.map((p) => (
                         <div
                             key={p._id}
@@ -164,7 +163,6 @@ const MyPayBills = () => {
                                 {p.additional && <p><strong>Additional:</strong> {p.additional}</p>}
                             </div>
 
-                            {/* Card Buttons */}
                             <div className="flex justify-between mt-6 pt-4">
                                 <button
                                     onClick={() => setEditPayment(p)}
@@ -191,7 +189,6 @@ const MyPayBills = () => {
                 </div>
             )}
 
-            {/* Edit Modal */}
             {editPayment && (
                 <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
                     <div className="p-6 rounded-lg w-[90%] max-w-md shadow-lg bg-gradient-to-r from-pink-500 via-red-400 to-orange-400 text-white">
@@ -224,7 +221,6 @@ const MyPayBills = () => {
                 </div>
             )}
 
-            {/* Delete Modal */}
             {deletePayment && (
                 <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
                     <div className="p-6 rounded-lg w-[90%] max-w-md shadow-lg bg-gradient-to-r from-pink-500 via-red-400 to-orange-400 text-white">

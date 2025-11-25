@@ -1,13 +1,16 @@
 /* Wrapper horizontally centered only */
 .loading-wrapper {
   display: flex;
-  justify-content: center; /* horizontal center */
-  padding: 40px 0; /* top-bottom spacing */
+  justify-content: center;
+  /* horizontal center */
+  padding: 40px 0;
+  /* top-bottom spacing */
 }
 
 /* LOADING text */
 .loading-text {
-  font-size: 3rem; /* large text */
+  font-size: 3rem;
+  /* large text */
   font-weight: 800;
   font-family: "Poppins", sans-serif;
   letter-spacing: 4px;
@@ -18,7 +21,8 @@
 
 /* Gradient letters for L, A, D, I, G */
 .gradient-text {
-  background: linear-gradient(to right, #ec4899, #f87171, #f97316); /* pink-red-orange */
+  background: linear-gradient(to right, #ec4899, #f87171, #f97316);
+  /* pink-red-orange */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
@@ -30,7 +34,8 @@
   width: 1em;
   height: 1em;
   border-radius: 50%;
-  background: linear-gradient(135deg, #22c55e, #3b82f6); /* green-blue gradient */
+  background: linear-gradient(135deg, #22c55e, #3b82f6);
+  /* green-blue gradient */
   margin: 0 0.05em;
   animation: spin 1.2s linear infinite;
   -webkit-background-clip: text;
@@ -39,12 +44,19 @@
 
 /* Spinning animation */
 @keyframes spin {
-  0% { transform: rotate(0deg) scale(1); }
-  50% { transform: rotate(180deg) scale(1.2); }
-  100% { transform: rotate(360deg) scale(1); }
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+
+  50% {
+    transform: rotate(180deg) scale(1.2);
+  }
+
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
 }
 
-/* Responsive text */
 @media (max-width: 768px) {
   .loading-text {
     font-size: 2rem;

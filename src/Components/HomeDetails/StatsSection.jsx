@@ -31,13 +31,16 @@ const stats = [
 const StatsSection = () => {
   return (
     <section className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 pt-15">
-      <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-4 bg-gradient-to-r from-pink-500 via-red-400 to-orange-400 text-transparent bg-clip-text">
+      <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-4 bg-gradient-to-r from-pink-500 via-red-400 to-orange-400 text-transparent bg-clip-text" data-aos="zoom-in"
+        data-aos-duration="1000">
         System Statistics
       </h2>
-      <p className="text-center text-gray-400 dark:text-gray-200 mb-12 max-w-2xl mx-auto">Our bill statistics give you a clear overview of your monthly activity.
-         Track payments, category usage, and overall progress to stay organized and manage your utilities more efficiently.</p>
+      <p className="text-center text-gray-400 dark:text-gray-200 mb-12 max-w-2xl mx-auto" data-aos="zoom-in"
+        data-aos-duration="1500">Our bill statistics give you a clear overview of your monthly activity.
+        Track payments, category usage, and overall progress to stay organized and manage your utilities more efficiently.</p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10" data-aos="zoom-in"
+        data-aos-duration="2000">
         {stats.map((item, index) => (
           <div
             key={index}

@@ -3,6 +3,6 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
-*{
+* {
     font-family: "Outfit", sans-serif;
 }

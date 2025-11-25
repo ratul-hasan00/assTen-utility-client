@@ -10,7 +10,6 @@ const Navbar = () => {
     const [open, setOpen] = useState(false);
     const { user, signOutUser } = useContext(AuthContext);
 
-    // Logout Handler
     const handleLogout = async () => {
         try {
             await signOutUser();
@@ -20,7 +19,6 @@ const Navbar = () => {
         }
     };
 
-    // Links when logged out
     const publicLinks = [
         { name: "Home", path: "/" },
         { name: "Bills", path: "/bills" },
@@ -28,7 +26,6 @@ const Navbar = () => {
         { name: "Register", path: "/register" },
     ];
 
-    // Links when logged in
     const privateLinks = [
         { name: "Home", path: "/" },
         { name: "Bills", path: "/bills" },
@@ -40,7 +37,6 @@ const Navbar = () => {
         <nav className="w-full sticky top-0 z-50 shadow-sm bg-base-100 dark:bg-base-200 border-b border-base-200">
             <div className="max-w-7xl mx-auto px-4 lg:px-6 py-3 flex justify-between items-center">
 
-                {/* Logo */}
                 <Link to="/" className="flex items-center gap-2">
                     <img
                         src={logo}
@@ -52,7 +48,6 @@ const Navbar = () => {
                     </span>
                 </Link>
 
-                {/* Desktop Menu */}
                 <ul className="hidden md:flex space-x-6 items-center text-lg">
                     {(user ? privateLinks : publicLinks).map((link) => (
                         <li key={link.name}>
@@ -71,10 +66,9 @@ const Navbar = () => {
                         </li>
                     ))}
 
-                    {/* When logged in show Profile Avatar + Logout */}
                     {user && (
                         <>
-                            {/* Profile Avatar */}
+
                             <li>
                                 <Link to="/profile">
                                     <img
@@ -85,7 +79,6 @@ const Navbar = () => {
                                 </Link>
                             </li>
 
-                            {/* Logout Button */}
                             <li>
                                 <button
                                     className="px-4 py-1 rounded-lg font-semibold 
@@ -99,13 +92,12 @@ const Navbar = () => {
                         </>
                     )}
 
-                    {/* Theme toggle */}
                     <li>
                         <ThemeToggle />
                     </li>
                 </ul>
 
-                {/* Mobile Controls */}
+
                 <div className="flex items-center md:hidden gap-2">
                     <ThemeToggle />
 
@@ -118,7 +110,6 @@ const Navbar = () => {
                 </div>
             </div>
 
-            {/* Mobile Dropdown */}
             <div
                 className={`md:hidden transition-all duration-300 overflow-hidden fixed top-16 right-4 w-56 rounded-l-xl shadow-lg z-50 ${open ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
                     }`}
@@ -145,7 +136,7 @@ const Navbar = () => {
 
                     {user && (
                         <>
-                            {/* Mobile Profile */}
+
                             <li>
                                 <Link
                                     to="/profile"
@@ -160,7 +151,6 @@ const Navbar = () => {
                                 </Link>
                             </li>
 
-                            {/* Mobile logout */}
                             <li>
                                 <button
                                     onClick={() => {
