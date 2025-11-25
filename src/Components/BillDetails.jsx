@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useLoaderData } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
+import toast from "react-hot-toast"; // <--- import React Hot Toast
 
 const BillDetails = () => {
     const bill = useLoaderData();  // GET DATA FROM ROUTER LOADER
@@ -11,7 +12,8 @@ const BillDetails = () => {
     const currentMonth = new Date().getMonth();
     const isPayable = billMonth === currentMonth;
 
-    const handlePayBill = (e) => {
+    // Handle payment submission
+    const handlePayBill = async (e) => {
         e.preventDefault();
         const form = e.target;
 
@@ -26,16 +28,25 @@ const BillDetails = () => {
             additional: form.additional.value,
         };
 
-        fetch("http://localhost:5000/pay-bills", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payInfo),
-        })
-            .then(res => res.json())
-            .then(() => {
-                alert("Bill Paid Successfully!");
-                setOpenModal(false);
+        try {
+            const res = await fetch("http://localhost:3000/payment-bills", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payInfo),
             });
+            const data = await res.json();
+
+            if (data.insertedId) {
+                toast.success("Bill Paid Successfully!");
+                setOpenModal(false);
+                form.reset(); // Clear form after success
+            } else {
+                toast.error("Payment failed! Try again.");
+            }
+        } catch (err) {
+            console.error(err);
+            toast.error("Something went wrong!");
+        }
     };
 
     return (
@@ -56,9 +67,7 @@ const BillDetails = () => {
 
                 {/* Right: Bill Details */}
                 <div className="md:w-1/2 flex flex-col justify-between p-6 text-white mt-6 md:mt-0">
-                    <h2 className="text-3xl font-bold mb-3 text-white">
-                        {bill.title}
-                    </h2>
+                    <h2 className="text-3xl font-bold mb-3 text-white">{bill.title}</h2>
 
                     <p className="mb-1 text-white hover:translate-x-1 transition-transform duration-300">
                         <strong>Category:</strong> {bill.category}
