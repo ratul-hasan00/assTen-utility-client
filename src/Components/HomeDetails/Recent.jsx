@@ -70,7 +70,7 @@ const Recent = () => {
               <div className="mt-4 flex justify-center">
                 {user ? (
                   <NavLink
-                    to={`/bills/${bill._id}`}
+                    to={`/billsdetails/${bill._id}`}
                     className="bg-gradient-to-r from-pink-500 via-red-400 to-orange-400 text-white py-2 px-4 rounded-lg font-semibold hover:scale-105 transition duration-300 text-center w-full"
                   >
                     View Details

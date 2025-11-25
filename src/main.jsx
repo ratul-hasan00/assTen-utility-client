@@ -15,6 +15,7 @@ import Profile from './Components/Navbar/Profile.jsx';
 import EditProfile from './Components/EditProfile.jsx';
 import PrivateRoute from './Components/PrivateRoute.jsx';
 import MyPayBills from './Components/MyPayBills.jsx';
+import BillDetails from './Components/BillDetails.jsx';
 
 
 
@@ -60,8 +61,15 @@ const router = createBrowserRouter([
         element: <PrivateRoute>
           <MyPayBills></MyPayBills>
         </PrivateRoute>
+      },
+      {
+        path: '/billsdetails/:id',
+        loader: ({ params }) => fetch(`http://localhost:3000/bills/${params.id}`),
+        element: <PrivateRoute>
+          <BillDetails></BillDetails>
+        </PrivateRoute>
       }
-      
+
     ]
   }
 ])

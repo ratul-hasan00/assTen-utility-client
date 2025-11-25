@@ -23,7 +23,6 @@ const Bills = () => {
             .finally(() => setLoadingBills(false));
     }, []);
 
-    // Show horizontally centered spinner while loading
     if (authLoading || loadingBills) {
         return (
             <div className="flex justify-center py-20">
@@ -47,11 +46,8 @@ const Bills = () => {
                         <div
                             key={bill._id}
                             className="relative flex flex-col rounded-3xl overflow-hidden transform transition duration-500 hover:scale-105"
-                            style={{
-                                background: "linear-gradient(135deg, #f3ec78 0%, #af4261 100%)",
-                            }}
+                            style={{ background: "linear-gradient(135deg, #f3ec78 0%, #af4261 100%)" }}
                         >
-                            {/* Image */}
                             <div className="flex justify-center mt-4">
                                 <img
                                     src={bill.image}
@@ -60,7 +56,6 @@ const Bills = () => {
                                 />
                             </div>
 
-                            {/* Card Content */}
                             <div className="flex flex-col justify-between p-6 flex-1">
                                 <div className="space-y-2 mt-4">
                                     <h3 className="text-lg md:text-xl font-bold text-white dark:text-white">
@@ -83,7 +78,7 @@ const Bills = () => {
                                 <div className="mt-4 flex justify-center">
                                     {user ? (
                                         <NavLink
-                                            to={`/bills/${bill._id}`}
+                                            to={`/billsdetails/${bill._id}`}
                                             className="bg-gradient-to-r from-pink-500 via-red-400 to-orange-400 text-white py-2 px-4 rounded-lg font-semibold hover:scale-105 transition duration-300 text-center w-full"
                                         >
                                             View Details
