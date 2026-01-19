@@ -190,16 +190,23 @@ const Register = () => {
         <button
           onClick={handleGoogleRegister}
           className="w-full py-3 border border-base-300 rounded-xl 
-            font-semibold flex items-center justify-center gap-3
-            hover:bg-base-200 transition-all duration-300"
+    font-semibold flex items-center justify-center gap-3
+    hover:bg-base-200 transition-all duration-300"
         >
-          <img
-            src="https://www.svgrepo.com/show/475656/google-color.svg"
-            alt="Google"
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 48 48"
             className="w-6 h-6"
-          />
+          >
+            <path fill="#EA4335" d="M24 9.5c3.54 0 6.7 1.23 9.21 3.64l6.86-6.86C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" />
+            <path fill="#4285F4" d="M46.5 24c0-1.64-.15-3.21-.43-4.73H24v9.02h12.64c-.54 2.9-2.18 5.36-4.64 7.04l7.15 5.55C43.77 36.3 46.5 30.64 46.5 24z" />
+            <path fill="#FBBC05" d="M10.53 28.41c-.48-1.43-.76-2.96-.76-4.41s.27-2.98.76-4.41l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.59l7.97-6.18z" />
+            <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.91-5.77l-7.15-5.55c-1.99 1.34-4.54 2.13-8.76 2.13-6.26 0-11.57-4.22-13.46-9.91l-7.97 6.18C6.51 42.62 14.62 48 24 48z" />
+          </svg>
           Register with Google
         </button>
+
 
         <p className="text-center mt-6 text-sm text-base-content">
           Already have an account?

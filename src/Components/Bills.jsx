@@ -10,7 +10,7 @@ const Bills = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { user, loading: authLoading } = useContext(AuthContext);
   const navigate = useNavigate();
-  const dropdownRef = useRef();
+  const dropdownRef = useRef(null);
 
   const categories = [
     "All",
@@ -55,7 +55,8 @@ const Bills = () => {
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    return () =>
+      document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   if (authLoading || loadingBills) {
@@ -69,13 +70,22 @@ const Bills = () => {
   return (
     <section className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-10">
       <title>Bills</title>
-      <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-6 bg-gradient-to-r from-pink-500 via-red-400 to-orange-400 text-transparent bg-clip-text" data-aos="zoom-in"
-        data-aos-duration="1000">
+
+      <h2
+        className="text-3xl md:text-4xl font-extrabold text-center mb-6 bg-gradient-to-r from-pink-500 via-red-400 to-orange-400 text-transparent bg-clip-text"
+        data-aos="zoom-in"
+        data-aos-duration="1000"
+      >
         All Bills
       </h2>
 
-      <div className="relative mb-6" ref={dropdownRef} data-aos="zoom-in"
-        data-aos-duration="1500">
+      {/* 🔽 FILTER DROPDOWN */}
+      <div
+        className="relative mb-6 z-50"
+        ref={dropdownRef}
+        data-aos="zoom-in"
+        data-aos-duration="1500"
+      >
         <button
           onClick={() => setDropdownOpen((prev) => !prev)}
           className="p-3 px-4 rounded-full bg-gradient-to-r from-pink-500 via-red-400 to-orange-400 text-white font-semibold shadow-lg hover:scale-105 transform transition duration-300 flex items-center justify-between w-48"
@@ -92,7 +102,7 @@ const Bills = () => {
         </button>
 
         {dropdownOpen && (
-          <ul className="absolute mt-1 w-48 bg-gradient-to-r from-pink-500 via-red-400 to-orange-400 rounded-xl shadow-lg overflow-hidden z-10">
+          <ul className="absolute mt-2 w-48 bg-gradient-to-r from-pink-500 via-red-400 to-orange-400 rounded-xl shadow-lg overflow-hidden z-[9999]">
             {categories.map((cat) => (
               <li
                 key={cat}
@@ -109,21 +119,26 @@ const Bills = () => {
         )}
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8" data-aos="zoom-in"
-        data-aos-duration="1800">
+      {/* 🔽 BILL CARDS */}
+      <div
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8"
+        data-aos="zoom-in"
+        data-aos-duration="1800"
+      >
         {bills.map((bill) => (
           <div
             key={bill._id}
             className="relative flex flex-col rounded-3xl overflow-hidden transform transition duration-500 hover:scale-105"
             style={{
-              background: "linear-gradient(135deg, #f3ec78 0%, #af4261 100%)",
+              background:
+                "linear-gradient(135deg, #f3ec78 0%, #af4261 100%)",
             }}
           >
             <div className="flex justify-center mt-4">
               <img
                 src={bill.image}
                 alt={bill.title}
-                className="w-36 h-36 object-cover rounded-full border-4 border-white dark:border-gray-800 transform transition duration-500 hover:scale-105"
+                className="w-36 h-36 object-cover rounded-full border-4 border-white dark:border-gray-800"
               />
             </div>
 
@@ -133,16 +148,19 @@ const Bills = () => {
                   {bill.title}
                 </h3>
                 <p className="text-sm text-white">
-                  Category: <span className="font-semibold">{bill.category}</span>
+                  Category:{" "}
+                  <span className="font-semibold">{bill.category}</span>
                 </p>
                 <p className="text-sm text-white">
-                  Location: <span className="font-semibold">{bill.location}</span>
+                  Location:{" "}
+                  <span className="font-semibold">{bill.location}</span>
                 </p>
                 <p className="text-sm text-white">
                   Date: <span className="font-semibold">{bill.date}</span>
                 </p>
                 <p className="text-sm text-white">
-                  Amount: <span className="font-semibold">${bill.amount}</span>
+                  Amount:{" "}
+                  <span className="font-semibold">${bill.amount}</span>
                 </p>
               </div>
 

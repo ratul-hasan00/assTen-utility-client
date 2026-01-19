@@ -139,9 +139,14 @@ const Login = () => {
       onClick={handleGoogleLogin}
       className="w-full py-3 border border-base-300 rounded-xl font-semibold flex items-center justify-center gap-3 hover:bg-base-200 transition-all duration-300"
     >
-      <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-6 h-6" />
+      <img
+        src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+        alt="Google"
+        className="w-6 h-6"
+      />
       Login with Google
     </button>
+
 
     <p className="text-center mt-6 text-sm text-base-content">
       Don't have an account?
